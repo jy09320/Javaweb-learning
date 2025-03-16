@@ -6,6 +6,10 @@ spring:
     url: jdbc:mysql://localhost:3306/tlias
     username: root
     password: 123456tpf
+  servlet:
+    multipart:
+      MaxFileSize: 10MB
+      MaxRequestSize: 100MB
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
