@@ -2,13 +2,12 @@ package com.jy.mapper;
 
 import com.jy.pojo.Emp;
 import com.jy.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import com.jy.pojo.JobOption;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -25,4 +24,15 @@ public interface EmpMapper {
     @Insert("insert into emp(username,name,gender,phone,job,salary,image,entry_date,dept_id,create_time,update_time) " +
             "values(#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
     void insert(Emp emp);
+
+    void deleteById(List<Integer> ids);
+
+    Emp getInfo(Integer id);
+
+    void update(Emp emp);
+    @MapKey("pos")
+    List<Map<String, Object>> countEmpJobData();
+
+    @MapKey("gender")
+    List<Map> countEmpGenderData();
 }
