@@ -23,4 +23,66 @@
     <select id="getStudentsByClassId" resultMap="getByIdMap"  >
         select * from student where clazz_id = #{id}
     </select>
+    <resultMap id="pageMap" type="com.jy.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="no" column="no"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="idCard" column="id_card"/>
+        <result property="isCollege" column="is_college"/>
+        <result property="address" column="address"/>
+        <result property="degree" column="degree"/>
+        <result property="graduationDate" column="graduation_date"/>
+        <result property="clazzId" column="clazz_id"/>
+        <result property="violationCount" column="violation_count"/>
+        <result property="violationScore" column="violation_score"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="clazzName" column="clazz_name"/>
+    </resultMap>
+    <select id="page" resultMap="pageMap">
+        select s.*,c.name clazz_name from student s left join clazz c on s.clazz_id = c.id
+    </select>
+    <delete id="delete">
+        delete from student where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="save" parameterType="com.jy.pojo.Student">
+        insert into student (id,name,no,gender,phone,id_card,is_college,address,degree,graduation_date,clazz_id,violation_count,violation_score,create_time,update_time)
+        values (#{id},#{name},#{no},#{gender},#{phone},#{idCard},#{isCollege},#{address},#{degree},#{graduationDate},#{clazzId},#{violationCount},#{violationScore},#{createTime},#{updateTime})
+    </insert>
+    <select id="getById" resultMap="getByIdMap">
+        select * from student where id = #{id}
+    </select>
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="no != null and no != ''">no = #{no},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="idCard != null and idCard != ''">id_card = #{idCard},</if>
+            <if test="isCollege != null">is_college = #{isCollege},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="degree != null">degree = #{degree},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
+            <if test="clazzId != null">clazz_id = #{clazzId},</if>
+            <if test="violationCount != null">violation_count = #{violationCount},</if>
+            <if test="violationScore != null">violation_score = #{violationScore},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateviolation">
+        update student
+        <set>
+            <if test="violationCount != null">violation_count = #{violationCount},</if>
+            <if test="violationScore != null">violation_score = #{violationScore},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

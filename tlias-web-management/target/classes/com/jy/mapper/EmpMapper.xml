@@ -101,4 +101,5 @@
             count(*) as value
         from emp group by gender ;
     </select>
+
 </mapper>
