@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jy.mapper.ClazzMapper">
+    <resultMap id="clazzResultMap" type="com.jy.pojo.Clazz">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="room" column="room"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="masterId" column="master_id"/>
+        <result property="subject" column="subject"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="masterName" column="master_name"/>
+    </resultMap>
+    <select id="page" resultMap="clazzResultMap">
+        select c.*, e.name master_name from clazz c left join emp e  on c.master_id = e.id
+    </select>
+    <delete id="deleteById">
+        delete from clazz where id = #{id}
+    </delete>
+    <insert id="save" parameterType="com.jy.pojo.Clazz">
+        insert into clazz(name, room, begin_date, end_date, master_id, subject, create_time, update_time)
+        values (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
+    </insert>
+    <resultMap id="getByIdMap" type="com.jy.pojo.Clazz">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="room" column="room"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="masterId" column="master_id"/>
+        <result property="subject" column="subject"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="getById" resultMap="getByIdMap">
+        select id,name,room,begin_date,end_date,master_id,subject,create_time,update_time from clazz where id = #{id}
+    </select>
+    <update id="update" parameterType="com.jy.pojo.Clazz">
+        update clazz set name = #{name}, room = #{room}, begin_date = #{beginDate}, end_date = #{endDate}, master_id = #{masterId}, subject = #{subject}, update_time = #{updateTime} where id = #{id}
+    </update>
+    <select id="list" resultMap="getByIdMap">
+        select id,name,room,begin_date,end_date,master_id,subject,create_time,update_time from clazz
+    </select>
+</mapper>
