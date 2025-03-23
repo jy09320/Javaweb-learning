@@ -48,8 +48,8 @@ public class StudentController {
         return Result.success();
     }
     @PutMapping("violation/{id}/{score}")
-    public Result updateViolation(@PathVariable Integer id,@PathVariable Short score) {
-        log.info("更新学员，学员信息：{}", id);
+    public Result updateViolation(@PathVariable Integer id,@PathVariable short score) {
+        log.info("更新学员违纪，学员信息：{}", id);
         studentService.updateViolation(id,score);
         return Result.success();
     }

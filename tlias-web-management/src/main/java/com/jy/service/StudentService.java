@@ -19,5 +19,5 @@ public interface StudentService {
 
     void update(Student student);
 
-    void updateViolation(Integer id, Short score);
+    void updateViolation(Integer id, short score);
 }

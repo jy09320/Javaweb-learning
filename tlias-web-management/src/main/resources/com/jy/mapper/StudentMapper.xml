@@ -85,4 +85,31 @@
         </set>
         where id = #{id}
     </update>
+    <select id="countStudentDegreeData" resultType="java.util.Map">
+        select
+            (case degree when 1 then '初中'
+                      when 2 then '高中'
+                      when 3 then '大专'
+                      when 4 then '本科'
+                      when 5 then '硕士'
+                      when 6 then '博士'
+                      else '其他' end)  as name,
+            count(*) as value
+        from student group by degree
+    </select>
+    <select id="countStudentCountData" resultType="java.util.Map">
+        select
+            (case clazz_id when 3 then 'JavaEE就业165期'
+                        when 4 then 'JavaEE就业166期'
+                        when 5 then '大数据就业58期'
+                        when 6 then 'JavaEE就业167期'
+                        when 7 then 'ai1期'
+                        when 8 then 'ai2期'
+                        when 11 then 'JavaEE就业168期'
+                        when 12 then 'JavaEE就业169期'
+                        else '其他' end)  clazz,
+            count(*) total
+        from student group by clazz_id
+        order by total
+    </select>
 </mapper>

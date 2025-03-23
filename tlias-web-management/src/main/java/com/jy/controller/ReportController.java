@@ -1,5 +1,7 @@
 package com.jy.controller;
 
+import com.jy.pojo.ClazzOption;
+import com.jy.pojo.DegreeOption;
 import com.jy.pojo.JobOption;
 import com.jy.pojo.Result;
 import com.jy.service.ReportService;
@@ -34,5 +36,17 @@ public class ReportController {
         log.info("统计各个性别的员工人数");
         List<Map> genderlist = reportService.getEmpGenderData();
         return Result.success(genderlist);
+    }
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData(){
+        log.info("统计各个学历的学生人数");
+        List<Map> degreeList = reportService.getStudentDegreeData();
+        return Result.success(degreeList);
+    }
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+      log.info("统计各个班级的学生人数");
+      ClazzOption clazzOption = reportService.getStudentCountData();
+      return Result.success(clazzOption);
     }
 }

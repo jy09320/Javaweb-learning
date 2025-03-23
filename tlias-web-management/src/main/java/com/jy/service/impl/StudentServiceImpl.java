@@ -72,11 +72,11 @@ public class StudentServiceImpl implements StudentService {
     }
     @Transactional(rollbackFor = {Exception.class})
     @Override
-    public void updateViolation(Integer id, Short score) {
+    public void updateViolation(Integer id, short score) {
         try {
             Student student = studentMapper.getById(id);
-            short violationScore = (short) (student.getViolationScore()-(short)score);
-            short violationCount = (short) (student.getViolationCount()+(short)1);
+            short violationScore = (short) (student.getViolationScore()+score);
+            short violationCount = (short) (student.getViolationCount()+1);
             student.setViolationScore(violationScore);
             student.setViolationCount(violationCount);
             student.setUpdateTime(LocalDateTime.now());

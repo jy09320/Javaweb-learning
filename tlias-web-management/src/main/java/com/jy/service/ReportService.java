@@ -1,5 +1,7 @@
 package com.jy.service;
 
+import com.jy.pojo.ClazzOption;
+import com.jy.pojo.DegreeOption;
 import com.jy.pojo.JobOption;
 
 import java.util.List;
@@ -13,4 +15,8 @@ public interface ReportService {
     JobOption getEmpJobData();
 
     List<Map> getEmpGenderData();
+
+    List<Map> getStudentDegreeData();
+
+    ClazzOption getStudentCountData();
 }

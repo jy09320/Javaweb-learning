@@ -101,5 +101,7 @@
             count(*) as value
         from emp group by gender ;
     </select>
-
+    <select id="getBydeptId" resultMap="empResultMap">
+        select * from emp where dept_id = #{id}
+    </select>
 </mapper>
