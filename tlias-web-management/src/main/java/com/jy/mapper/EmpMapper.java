@@ -39,4 +39,6 @@ public interface EmpMapper {
     List<Emp> all();
 
     List<Emp> getBydeptId(Integer id);
+    @Select("select id,username,password from emp where username=#{username} and password=#{password}")
+    Emp getByUsernameAndPassword(Emp emp);
 }
