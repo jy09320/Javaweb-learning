@@ -1,5 +1,6 @@
 package com.jy.controller;
 
+import com.jy.anno.Log;
 import com.jy.pojo.PageResult;
 import com.jy.pojo.Result;
 import com.jy.pojo.Student;
@@ -23,12 +24,14 @@ public class StudentController {
         PageResult<Student> pageResult =studentService.page(studentQueryParam);
         return Result.success(pageResult);
     }
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("批量删除，id集合：{}", ids);
         studentService.delete(ids);
         return Result.success();
     }
+    @Log
     @PostMapping
     public Result save(@RequestBody Student student) {
         log.info("新增学员，学员信息：{}", student);
@@ -41,12 +44,14 @@ public class StudentController {
         Student student = studentService.getInfo(id);
         return Result.success(student);
     }
+    @Log
     @PutMapping
     public Result update(@RequestBody Student student) {
         log.info("更新学员，学员信息：{}", student);
         studentService.update(student);
         return Result.success();
     }
+    @Log
     @PutMapping("violation/{id}/{score}")
     public Result updateViolation(@PathVariable Integer id,@PathVariable short score) {
         log.info("更新学员违纪，学员信息：{}", id);

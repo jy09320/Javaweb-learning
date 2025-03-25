@@ -20,7 +20,7 @@ public class OperateLogAspect {
     @Autowired
     private OperateLogMapper operateLogMapper;
 
-    @Around("execution(* com.jy.controller.*.*(..))")
+    @Around("@annotation(com.jy.anno.Log)")
     public Object logOperate(ProceedingJoinPoint joinPoint) throws Throwable {
         // 获取操作人ID，这里假设通过CurrentHolder获取，实际开发中需要根据实际需求获取
         int operateEmpId = getOperateEmpId();

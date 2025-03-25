@@ -1,5 +1,6 @@
 package com.jy.controller;
 
+import com.jy.anno.Log;
 import com.jy.pojo.Emp;
 import com.jy.pojo.EmpQueryParam;
 import com.jy.pojo.PageResult;
@@ -36,12 +37,14 @@ public class EmpController {
         PageResult<Emp> pageResult=empService.page(empQueryParam);
         return Result.success(pageResult);
     }
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp){
         log.info("新增员工:{}",emp);
         empService.save(emp);
         return Result.success();
     }
+    @Log
     @DeleteMapping
     public Result delete(@RequestParam List<Integer> ids){
         log.info("删除员工:{}",ids);
@@ -54,6 +57,7 @@ public class EmpController {
         Emp emp=empService.getInfo(id);
         return Result.success(emp);
     }
+    @Log
     @PutMapping
     public Result update(@RequestBody Emp emp){
         log.info("修改员工信息:{}",emp);

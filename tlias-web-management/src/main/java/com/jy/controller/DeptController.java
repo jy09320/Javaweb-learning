@@ -1,5 +1,6 @@
 package com.jy.controller;
 import com.itheima.pojo.Dept;
+import com.jy.anno.Log;
 import com.jy.pojo.Result;
 import com.jy.service.DeptService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,12 +38,14 @@ public class DeptController {
 //        return Result.success();
 //    }
     //方式三：前端传入的请求参数名和后端接收的参数名一致，直接使用即可
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         log.info("根据id删除部门:{}",id);
         deptService.deleteById(id);
         return Result.success();
     }
+    @Log
     @PostMapping
     public Result save(@RequestBody Dept dept) {
         log.info("新增或修改部门:{}",dept);
@@ -55,6 +58,7 @@ public class DeptController {
         Dept dept=deptService.findById(id);
         return Result.success(dept);
     }
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         log.info("修改部门信息:{}",dept);

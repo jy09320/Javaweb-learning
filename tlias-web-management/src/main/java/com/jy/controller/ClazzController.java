@@ -1,5 +1,6 @@
 package com.jy.controller;
 
+import com.jy.anno.Log;
 import com.jy.pojo.Clazz;
 import com.jy.pojo.ClazzQueryParam;
 import com.jy.pojo.PageResult;
@@ -21,13 +22,14 @@ public class ClazzController {
         PageResult<Clazz> pageResult = clazzService.page(clazzQueryParam);
         return Result.success(pageResult);
     }
+    @Log
     @DeleteMapping({"/{id}"})
     public Result delete(@PathVariable Integer id) {
         log.info("删除班级信息,{}", id);
         clazzService.deleteById(id);
         return Result.success();
     }
-
+    @Log
     @PostMapping
     public Result save(@RequestBody Clazz clazz) {
         log.info("添加班级信息,{}", clazz);
@@ -40,6 +42,7 @@ public class ClazzController {
         Clazz clazz = clazzService.getInfo(id);
         return Result.success(clazz);
     }
+    @Log
     @PutMapping
     public Result update(@RequestBody Clazz clazz) {
         log.info("修改班级信息,{}", clazz);
