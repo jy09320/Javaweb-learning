@@ -1,6 +1,8 @@
 package com.jy.interceptor;
 
+import com.jy.utils.CurrentHolder;
 import com.jy.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +37,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         //5. 解析token，如果解析失败，返回错误结果（未登录）。
         try {
-            JwtUtils.parseJWT(jwt);
+            Claims claims =JwtUtils.parseJWT(jwt);
+            Integer empId = (Integer) claims.get("id");
+            CurrentHolder.setCurrentId(empId);
         } catch (Exception e) {
             e.printStackTrace();
             log.info("解析令牌失败, 返回错误结果");
